@@ -54,7 +54,7 @@ function ResumePreview({
 
   /* 🔐 Login check */
   const handleLogin = () => {
-    if (userId === "Sreee" && password === "M@@ny@sr1") {
+    if (userId === "Sreee" && password === "Password") {
       setShowLogin(false);
       setUserId("");
       setPassword("");
