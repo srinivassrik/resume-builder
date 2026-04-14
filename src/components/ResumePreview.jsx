@@ -6,7 +6,7 @@ import TemplateOne from "./TemplateOne";
 import TemplateTwo from "./TemplateTwo";
 import TemplateThree from "./TemplateThree";
 import TemplateFour from "./TemplateFour";
-import TemplateFive from "./TemplateFive"; // ✅ NEW
+import TemplateFive from "./TemplateFive";
 
 function ResumePreview({
   template,
@@ -30,6 +30,7 @@ function ResumePreview({
   const [showLogin, setShowLogin] = useState(false);
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   /* 📄 PDF Download */
   const startDownload = () => {
@@ -58,9 +59,10 @@ function ResumePreview({
       setShowLogin(false);
       setUserId("");
       setPassword("");
+      setError("");
       startDownload();
     } else {
-      alert("Invalid User ID or Password");
+      setError("Invalid User ID or Password");
     }
   };
 
@@ -82,7 +84,7 @@ function ResumePreview({
     certificates,
   };
 
-  /* 🧩 Template Renderer (UPDATED) */
+  /* 🧩 Template Renderer */
   const renderTemplate = () => {
     switch (template) {
       case "one":
@@ -94,7 +96,7 @@ function ResumePreview({
       case "four":
         return <TemplateFour {...commonProps} />;
       case "five":
-        return <TemplateFive {...commonProps} />; // ✅ NEW
+        return <TemplateFive {...commonProps} />;
       default:
         return <TemplateFive {...commonProps} />;
     }
@@ -106,7 +108,18 @@ function ResumePreview({
       <div ref={resumeRef}>{renderTemplate()}</div>
 
       {/* Download Button */}
-      <button style={{ marginTop: "10px" }} onClick={() => setShowLogin(true)}>
+      <button
+        style={{
+          marginTop: "10px",
+          padding: "10px 15px",
+          background: "#007bff",
+          color: "#fff",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+        onClick={() => setShowLogin(true)}
+      >
         Download PDF
       </button>
 
@@ -132,10 +145,16 @@ function ResumePreview({
               style={inputStyle}
             />
 
+            {/* Error Message */}
+            {error && <p style={{ color: "red" }}>{error}</p>}
+
             <div style={{ marginTop: "10px" }}>
               <button onClick={handleLogin}>Login & Download</button>
               <button
-                onClick={() => setShowLogin(false)}
+                onClick={() => {
+                  setShowLogin(false);
+                  setError("");
+                }}
                 style={{ marginLeft: "10px" }}
               >
                 Cancel

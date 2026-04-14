@@ -18,49 +18,45 @@ const careerObjectives = {
 };
 
 function ResumeForm({
-  name,
-  setName,
-  father,
-  setFather,
-  mother,
-  setMother,
-  dob,
-  setDob,
-  gender,
-  setGender,
-  languages,
-  setLanguages,
-  place,
-  setPlace,
-  mobile,
-  setMobile,
-  email,
-  setEmail,
+  name, setName,
+  father, setFather,
+  mother, setMother,
+  dob, setDob,
+  gender, setGender,
+  languages, setLanguages,
+  place, setPlace,
+  mobile, setMobile,
+  email, setEmail,
 
-  jobRole,
-  setJobRole,
-  objective,
-  setObjective,
+  jobRole, setJobRole,
+  objective, setObjective,
 
-  gradCollege,
-  setGradCollege,
-  gradUniversity,
-  setGradUniversity,
-  gradYear,
-  setGradYear,
-  gradStatus,
-  setGradStatus,
-  gradSpecialization,
-  setGradSpecialization,
+  // Graduation
+  gradCollege, setGradCollege,
+  gradUniversity, setGradUniversity,
+  gradYear, setGradYear,
+  gradStatus, setGradStatus,
+  gradSpecialization, setGradSpecialization,
 
-  strengths,
-  setStrengths,
-  hobbies,
-  setHobbies,
-  certificates,
-  setCertificates,
+  // Intermediate
+  interCollege, setInterCollege,
+  interBoard, setInterBoard,
+  interYear, setInterYear,
+  interScore, setInterScore,
+  interSpecialization, setInterSpecialization,
+
+  // SSC
+  schoolName, setSchoolName,
+  schoolBoard, setSchoolBoard,
+  schoolYear, setSchoolYear,
+  schoolScore, setSchoolScore,
+  schoolSpecialization, setSchoolSpecialization,
+
+  strengths, setStrengths,
+  hobbies, setHobbies,
+  certificates, setCertificates,
 }) {
-  // 🔐 Tracks whether objective was auto-generated
+
   const autoFilled = useRef(false);
 
   useEffect(() => {
@@ -71,19 +67,12 @@ function ResumeForm({
   }, [jobRole, setObjective]);
 
   const handleObjectiveChange = (e) => {
-    autoFilled.current = false; // user took control
+    autoFilled.current = false;
     setObjective(e.target.value);
   };
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: "20px",
-        borderRadius: "8px",
-        maxWidth: "350px",
-      }}
-    >
+    <div style={{ border: "1px solid #ccc", padding: "20px", borderRadius: "8px", maxWidth: "350px" }}>
       <h2 style={{ textAlign: "center" }}>Resume Details</h2>
 
       {/* Personal Details */}
@@ -97,33 +86,47 @@ function ResumeForm({
       <input placeholder="Mobile Number" value={mobile} onChange={(e) => setMobile(e.target.value)} />
       <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
-     {/* Job Role */}
-<select value={jobRole} onChange={(e) => setJobRole(e.target.value)}>
-  <option value="">Select Job Applying For</option>
-  {Object.keys(careerObjectives).map((role) => (
-    <option key={role} value={role}>
-      {role}
-    </option>
-  ))}
-</select>
+      {/* Job Role */}
+      <select value={jobRole} onChange={(e) => setJobRole(e.target.value)}>
+        <option value="">Select Job Applying For</option>
+        {Object.keys(careerObjectives).map((role) => (
+          <option key={role} value={role}>{role}</option>
+        ))}
+      </select>
 
-{/* Career Objective */}
-<textarea
-  placeholder="Career Objective"
-  rows={4}
-  value={objective}
-  onChange={handleObjectiveChange}
-/>
+      {/* Objective */}
+      <textarea
+        placeholder="Career Objective"
+        rows={4}
+        value={objective}
+        onChange={handleObjectiveChange}
+      />
 
-      
-
+      {/* Graduation */}
       <h3>Graduation</h3>
       <input placeholder="College Name" value={gradCollege} onChange={(e) => setGradCollege(e.target.value)} />
       <input placeholder="University" value={gradUniversity} onChange={(e) => setGradUniversity(e.target.value)} />
       <input placeholder="Specialization" value={gradSpecialization} onChange={(e) => setGradSpecialization(e.target.value)} />
       <input placeholder="Year of Passing" value={gradYear} onChange={(e) => setGradYear(e.target.value)} />
-      <input placeholder="Status (Pursuing / Completed)" value={gradStatus} onChange={(e) => setGradStatus(e.target.value)} />
+      <input placeholder="Status" value={gradStatus} onChange={(e) => setGradStatus(e.target.value)} />
 
+      {/* Intermediate */}
+      <h3>Intermediate</h3>
+      <input placeholder="College Name" value={interCollege} onChange={(e) => setInterCollege(e.target.value)} />
+      <input placeholder="Board" value={interBoard} onChange={(e) => setInterBoard(e.target.value)} />
+      <input placeholder="Specialization" value={interSpecialization} onChange={(e) => setInterSpecialization(e.target.value)} />
+      <input placeholder="Year" value={interYear} onChange={(e) => setInterYear(e.target.value)} />
+      <input placeholder="Score" value={interScore} onChange={(e) => setInterScore(e.target.value)} />
+
+      {/* SSC */}
+      <h3>SSC</h3>
+      <input placeholder="School Name" value={schoolName} onChange={(e) => setSchoolName(e.target.value)} />
+      <input placeholder="Board" value={schoolBoard} onChange={(e) => setSchoolBoard(e.target.value)} />
+      <input placeholder="Specialization" value={schoolSpecialization} onChange={(e) => setSchoolSpecialization(e.target.value)} />
+      <input placeholder="Year" value={schoolYear} onChange={(e) => setSchoolYear(e.target.value)} />
+      <input placeholder="Score" value={schoolScore} onChange={(e) => setSchoolScore(e.target.value)} />
+
+      {/* Other */}
       <h3>Other Details</h3>
       <input placeholder="Strengths" value={strengths} onChange={(e) => setStrengths(e.target.value)} />
       <input placeholder="Hobbies" value={hobbies} onChange={(e) => setHobbies(e.target.value)} />
